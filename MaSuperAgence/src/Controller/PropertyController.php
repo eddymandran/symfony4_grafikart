@@ -40,10 +40,22 @@ class PropertyController extends AbstractController
 
     public function index(): Response
     {
-        $property = $this->repository->findAllVisible();
-       /*  $property[0]->setSold(true);
-        $this->em->flush(); */
-
         return $this->render('property/index.html.twig', ['current_menu' => 'properties']);
+    }
+
+    /**
+     * @Route("/biens/{slug}-{id}", name="property.show",requirements={"slug": "[a-z0-9\-]*"})
+     * @param Property $property
+     * @return Response
+     */
+    public function show(Property $property, string $slug): response
+    {   
+        if ($property->getSlug() !== $slug ){
+            return $this->redirectToRoute('property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ], 301);
+        }
+        return $this->render('property/show.html.twig', ['property' => $property, 'current_menu' => 'properties']);
     }
 }
