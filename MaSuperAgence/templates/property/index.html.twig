@@ -3,6 +3,23 @@
 {% block title 'Tous nos biens' %}
 
 {% block body %}
+	<div class="bg-light pt-4 pb-4">
+		<div class="container">
+			{{ form_start(form)}}
+			<div class="row align-items-end ">
+				<div class="col">
+					{{ form_row(form.minSurface)}}
+				</div>
+				<div class="col">
+					{{ form_row(form.maxPrice)}}
+				</div>
+				<div class="col">
+					<button class="btn btn-primary">Rechercher</button>
+				</div>
+			</div>
+			{{ form_end(form)}}
+		</div>
+	</div>
 	<div class="container mt-4">
 		<h1>Voir tous nos biens</h1>
 		<div class="row">
